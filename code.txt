@@ -1,0 +1,30 @@
+#define A0 34 //กำหนดขาที่จะเชื่อมต่อ Sensor
+#include <OneWire.h>
+//OneWire ds(A0);
+#include <DallasTemperature.h>
+#define ONE_WIRE_BUS 21 //กำหนดขาที่จะเชื่อมต่อ Sensor
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(A0 , INPUT);
+  Serial.begin(9600);
+}
+void loop() {
+  float t =0;
+  sensors.requestTemperatures();
+  t = sensors.getTempCByIndex(0);
+  int a = analogRead(A0);
+  int b = (a * 100) /1750;
+  Serial.print("ความใสของน้ำ :");
+  Serial.println(a);
+//  Serial.print(b);
+//  Serial.println(" %");
+  Serial.print("อุณหภูมิของน้ำ :");
+  Serial.println(t);
+  Serial.println("................................");
+//  Serial.println(b);
+//  Serial.println();
+  delay(3000);
+  // put your main code here, to run repeatedly:
+}
